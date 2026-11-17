@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Way_to_home.HomePage"
+             BackgroundColor="#FEF8EE"
+             Shell.NavBarIsVisible="False">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20, 30, 20, 20" Spacing="25">
+
+            <!-- Шапка -->
+            <HorizontalStackLayout Spacing="10">
+                <Border StrokeShape="RoundRectangle 15" BackgroundColor="#B84A00" WidthRequest="35" HeightRequest="35" Padding="0">
+                    <Label Text="🐾" FontSize="18" HorizontalOptions="Center" VerticalOptions="Center"/>
+                </Border>
+                <Label Text="Путь домой" FontSize="20" FontAttributes="Bold" TextColor="#2B2D42" VerticalOptions="Center"/>
+            </HorizontalStackLayout>
+
+            <!-- Главный баннер -->
+            <Border StrokeShape="RoundRectangle 20" BackgroundColor="#F4C565" Padding="20">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="Каждому питомцу — свой дом" FontSize="26" FontAttributes="Bold" TextColor="#2B2D42" LineBreakMode="WordWrap"/>
+                    <Label Text="Найдите друга в приюте и помогите тем, кто ещё ждёт." FontSize="14" TextColor="#2B2D42" Margin="0,0,0,10"/>
+
+                    <!-- Кнопка: Смотреть животных -->
+                    <Border StrokeShape="RoundRectangle 20" BackgroundColor="#B84A00" Padding="15">
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnViewAnimalsClicked" />
+                        </Border.GestureRecognizers>
+                        <Label Text="Смотреть животных" TextColor="White" FontAttributes="Bold" HorizontalOptions="Center" FontSize="16"/>
+                    </Border>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Меню действий -->
+            <Label Text="Что вы хотите сделать?" FontSize="18" FontAttributes="Bold" TextColor="#2B2D42"/>
+
+            <!-- Меню 1: Найти питомца -->
+            <Border StrokeShape="RoundRectangle 15" StrokeThickness="1" Stroke="#EAEAEA" BackgroundColor="White" Padding="15">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnViewAnimalsClicked" />
+                </Border.GestureRecognizers>
+                <Grid ColumnDefinitions="50, *" ColumnSpacing="10">
+                    <Border Grid.Column="0" StrokeShape="RoundRectangle 25" BackgroundColor="#FCEAC2" WidthRequest="50" HeightRequest="50">
+                        <Label Text="🐾" FontSize="20" HorizontalOptions="Center" VerticalOptions="Center"/>
+                    </Border>
+                    <VerticalStackLayout Grid.Column="1" VerticalOptions="Center">
+                        <Label Text="Найти питомца" FontSize="16" FontAttributes="Bold" TextColor="#2B2D42"/>
+                        <Label Text="Анкеты животных с фильтрами" FontSize="14" TextColor="#6C757D"/>
+                    </VerticalStackLayout>
+                </Grid>
+            </Border>
+
+            <!-- Меню 2: Подготовиться -->
+            <Border StrokeShape="RoundRectangle 15" StrokeThickness="1" Stroke="#EAEAEA" BackgroundColor="White" Padding="15">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnMemoClicked" />
+                </Border.GestureRecognizers>
+                <Grid ColumnDefinitions="50, *" ColumnSpacing="10">
+                    <Border Grid.Column="0" StrokeShape="RoundRectangle 25" BackgroundColor="#FCEAC2" WidthRequest="50" HeightRequest="50">
+                        <Label Text="📋" FontSize="20" HorizontalOptions="Center" VerticalOptions="Center"/>
+                    </Border>
+                    <VerticalStackLayout Grid.Column="1" VerticalOptions="Center">
+                        <Label Text="Подготовиться к питомцу" FontSize="16" FontAttributes="Bold" TextColor="#2B2D42"/>
+                        <Label Text="Памятки и чек-лист" FontSize="14" TextColor="#6C757D"/>
+                    </VerticalStackLayout>
+                </Grid>
+            </Border>
+
+            <!-- Меню 3: Помочь приюту -->
+            <Border StrokeShape="RoundRectangle 15" StrokeThickness="1" Stroke="#EAEAEA" BackgroundColor="White" Padding="15">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnHelpClicked" />
+                </Border.GestureRecognizers>
+                <Grid ColumnDefinitions="50, *" ColumnSpacing="10">
+                    <Border Grid.Column="0" StrokeShape="RoundRectangle 25" BackgroundColor="#FCEAC2" WidthRequest="50" HeightRequest="50">
+                        <Label Text="❤️" FontSize="20" HorizontalOptions="Center" VerticalOptions="Center"/>
+                    </Border>
+                    <VerticalStackLayout Grid.Column="1" VerticalOptions="Center">
+                        <Label Text="Помочь приюту" FontSize="16" FontAttributes="Bold" TextColor="#2B2D42"/>
+                        <Label Text="Что нужно прямо сейчас" FontSize="14" TextColor="#6C757D"/>
+                    </VerticalStackLayout>
+                </Grid>
+            </Border>
+
+            <!-- Блок "Ждут дом" -->
+            <Grid ColumnDefinitions="*, Auto" Margin="0,10,0,0">
+                <Label Text="Ждут дом" FontSize="18" FontAttributes="Bold" TextColor="#2B2D42" VerticalOptions="Center"/>
+                <Label Grid.Column="1" Text="Все животные" TextColor="#B84A00" FontAttributes="Bold" FontSize="14" VerticalOptions="Center">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnViewAnimalsClicked" />
+                    </Label.GestureRecognizers>
+                </Label>
+            </Grid>
+
+            <!-- Горизонтальный список животных (2 карточки для примера) -->
+            <ScrollView Orientation="Horizontal" HorizontalScrollBarVisibility="Never">
+                <HorizontalStackLayout Spacing="15">
+
+                    <!-- Карточка 1 -->
+                    <Border StrokeShape="RoundRectangle 15" StrokeThickness="1" Stroke="#EAEAEA" BackgroundColor="White" WidthRequest="150">
+                        <VerticalStackLayout>
+                            <Border HeightRequest="100" BackgroundColor="#FCEAC2" StrokeThickness="0" Margin="5">
+                                <Label Text="Фото" TextColor="#C58F44" HorizontalOptions="Center" VerticalOptions="Center"/>
+                            </Border>
+                            <VerticalStackLayout Padding="10,5,10,10">
+                                <Label Text="Бим" FontAttributes="Bold" FontSize="16" TextColor="#2B2D42"/>
+                                <Label Text="Пёс · 2 года" FontSize="12" TextColor="#6C757D"/>
+                            </VerticalStackLayout>
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <!-- Карточка 2 -->
+                    <Border StrokeShape="RoundRectangle 15" StrokeThickness="1" Stroke="#EAEAEA" BackgroundColor="White" WidthRequest="150">
+                        <VerticalStackLayout>
+                            <Border HeightRequest="100" BackgroundColor="#FCEAC2" StrokeThickness="0" Margin="5">
+                                <Label Text="Фото" TextColor="#C58F44" HorizontalOptions="Center" VerticalOptions="Center"/>
+                            </Border>
+                            <VerticalStackLayout Padding="10,5,10,10">
+                                <Label Text="Мурка" FontAttributes="Bold" FontSize="16" TextColor="#2B2D42"/>
+                                <Label Text="Кошка · 4 года" FontSize="12" TextColor="#6C757D"/>
+                            </VerticalStackLayout>
+                        </VerticalStackLayout>
+                    </Border>
+
+                </HorizontalStackLayout>
+            </ScrollView>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

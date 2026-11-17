@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Way_to_home.FiltersPage"
+             BackgroundColor="#FEF8EE"
+             Shell.NavBarIsVisible="False">
+    <!-- Скрываем стандартный верхний бар, делаем свой -->
+
+    <Grid RowDefinitions="Auto, *, Auto" Padding="20, 30, 20, 20">
+
+        <!-- ШАПКА С КНОПКОЙ НАЗАД -->
+        <HorizontalStackLayout Grid.Row="0" Spacing="15" Margin="0,0,0,20">
+            <Border StrokeShape="RoundRectangle 20" StrokeThickness="1" Stroke="#E0E0E0" BackgroundColor="White" WidthRequest="40" HeightRequest="40" Padding="0">
+                <!-- Стрелка назад -->
+                <Label Text="&lt;" FontSize="20" TextColor="#2B2D42" HorizontalOptions="Center" VerticalOptions="Center"/>
+            </Border>
+            <Label Text="Фильтры" FontSize="20" FontAttributes="Bold" TextColor="#2B2D42" VerticalOptions="Center"/>
+        </HorizontalStackLayout>
+
+        <!-- СПИСОК ФИЛЬТРОВ (Прокручиваемый) -->
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Spacing="20">
+
+                <!-- Вид -->
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="Вид" FontAttributes="Bold" TextColor="#2B2D42" FontSize="16"/>
+                    <FlexLayout Wrap="Wrap" JustifyContent="Start" AlignItems="Start">
+                        <Border StrokeShape="RoundRectangle 20" BackgroundColor="#B84A00" Padding="15,8" Margin="0,0,10,10">
+                            <Label Text="Все" TextColor="White" FontAttributes="Bold"/>
+                        </Border>
+                        <Border StrokeShape="RoundRectangle 20" Stroke="#D1D1D1" StrokeThickness="1" Padding="15,8" Margin="0,0,10,10">
+                            <Label Text="Собаки" TextColor="#2B2D42"/>
+                        </Border>
+                        <Border StrokeShape="RoundRectangle 20" Stroke="#D1D1D1" StrokeThickness="1" Padding="15,8" Margin="0,0,10,10">
+                            <Label Text="Кошки" TextColor="#2B2D42"/>
+                        </Border>
+                    </FlexLayout>
+                </VerticalStackLayout>
+
+                <!-- Возраст -->
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="Возраст" FontAttributes="Bold" TextColor="#2B2D42" FontSize="16"/>
+                    <FlexLayout Wrap="Wrap">
+                        <Border StrokeShape="RoundRectangle 20" BackgroundColor="#B84A00" Padding="15,8" Margin="0,0,10,10">
+                            <Label Text="Любой" TextColor="White" FontAttributes="Bold"/>
+                        </Border>
+                        <Border StrokeShape="RoundRectangle 20" Stroke="#D1D1D1" StrokeThickness="1" Padding="15,8" Margin="0,0,10,10">
+                            <Label Text="До 1 года" TextColor="#2B2D42"/>
+                        </Border>
+                        <Border StrokeShape="RoundRectangle 20" Stroke="#D1D1D1" StrokeThickness="1" Padding="15,8" Margin="0,0,10,10">
+                            <Label Text="1–7 лет" TextColor="#2B2D42"/>
+                        </Border>
+                        <Border StrokeShape="RoundRectangle 20" Stroke="#D1D1D1" StrokeThickness="1" Padding="15,8" Margin="0,0,10,10">
+                            <Label Text="Старше 7" TextColor="#2B2D42"/>
+                        </Border>
+                    </FlexLayout>
+                </VerticalStackLayout>
+
+                <!-- Размер -->
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="Размер" FontAttributes="Bold" TextColor="#2B2D42" FontSize="16"/>
+                    <FlexLayout Wrap="Wrap">
+                        <Border StrokeShape="RoundRectangle 20" BackgroundColor="#B84A00" Padding="15,8" Margin="0,0,10,10">
+                            <Label Text="Любой" TextColor="White" FontAttributes="Bold"/>
+                        </Border>
+                        <Border StrokeShape="RoundRectangle 20" Stroke="#D1D1D1" StrokeThickness="1" Padding="15,8" Margin="0,0,10,10">
+                            <Label Text="Малый" TextColor="#2B2D42"/>
+                        </Border>
+                        <Border StrokeShape="RoundRectangle 20" Stroke="#D1D1D1" StrokeThickness="1" Padding="15,8" Margin="0,0,10,10">
+                            <Label Text="Средний" TextColor="#2B2D42"/>
+                        </Border>
+                        <Border StrokeShape="RoundRectangle 20" Stroke="#D1D1D1" StrokeThickness="1" Padding="15,8" Margin="0,0,10,10">
+                            <Label Text="Крупный" TextColor="#2B2D42"/>
+                        </Border>
+                    </FlexLayout>
+                </VerticalStackLayout>
+
+                <!-- Характер -->
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="Характер" FontAttributes="Bold" TextColor="#2B2D42" FontSize="16"/>
+                    <FlexLayout Wrap="Wrap">
+                        <Border StrokeShape="RoundRectangle 20" Stroke="#D1D1D1" StrokeThickness="1" Padding="15,8" Margin="0,0,10,10">
+                            <Label Text="Спокойный" TextColor="#2B2D42"/>
+                        </Border>
+                        <Border StrokeShape="RoundRectangle 20" Stroke="#D1D1D1" StrokeThickness="1" Padding="15,8" Margin="0,0,10,10">
+                            <Label Text="Активный" TextColor="#2B2D42"/>
+                        </Border>
+                        <Border StrokeShape="RoundRectangle 20" Stroke="#D1D1D1" StrokeThickness="1" Padding="15,8" Margin="0,0,10,10">
+                            <Label Text="Ласковый" TextColor="#2B2D42"/>
+                        </Border>
+                        <Border StrokeShape="RoundRectangle 20" Stroke="#D1D1D1" StrokeThickness="1" Padding="15,8" Margin="0,0,10,10">
+                            <Label Text="Ладит с детьми" TextColor="#2B2D42"/>
+                        </Border>
+                    </FlexLayout>
+                </VerticalStackLayout>
+
+                <!-- Здоровье -->
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="Здоровье" FontAttributes="Bold" TextColor="#2B2D42" FontSize="16"/>
+                    <FlexLayout Wrap="Wrap">
+                        <Border StrokeShape="RoundRectangle 20" Stroke="#D1D1D1" StrokeThickness="1" Padding="15,8" Margin="0,0,10,10">
+                            <Label Text="Привит" TextColor="#2B2D42"/>
+                        </Border>
+                        <Border StrokeShape="RoundRectangle 20" Stroke="#D1D1D1" StrokeThickness="1" Padding="15,8" Margin="0,0,10,10">
+                            <Label Text="Стерилизован" TextColor="#2B2D42"/>
+                        </Border>
+                    </FlexLayout>
+                </VerticalStackLayout>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- НИЖНИЕ КНОПКИ -->
+        <VerticalStackLayout Grid.Row="2" Spacing="10" Margin="0,20,0,0">
+            <Border StrokeShape="RoundRectangle 20" BackgroundColor="#B84A00" Padding="15" StrokeThickness="0">
+                <Label Text="Показать анкеты" TextColor="White" FontAttributes="Bold" HorizontalOptions="Center" FontSize="16"/>
+            </Border>
+            <Border StrokeShape="RoundRectangle 20" Stroke="#B84A00" StrokeThickness="1" BackgroundColor="Transparent" Padding="15">
+                <Label Text="Сбросить" TextColor="#B84A00" FontAttributes="Bold" HorizontalOptions="Center" FontSize="16"/>
+            </Border>
+        </VerticalStackLayout>
+
+    </Grid>
+</ContentPage>

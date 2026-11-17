@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="Way_to_home.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:Way_to_home"
+    Shell.FlyoutBehavior="Disabled"
+    Title="Way to home">
+
+    <ShellContent
+    Title="Главная"
+    ContentTemplate="{DataTemplate local:HomePage}"
+    Route="HomePage" />
+</Shell>

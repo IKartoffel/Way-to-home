@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Way_to_home.MainPage"
+             BackgroundColor="#FEF8EE"
+             Shell.NavBarIsVisible="False">
+
+    <Grid RowDefinitions="*, Auto">
+
+        <!-- КОНТЕНТ (Прокручиваемый) -->
+        <ScrollView Grid.Row="0">
+            <VerticalStackLayout Padding="20, 30, 20, 20" Spacing="20">
+
+                <!-- Стрелочка Назад (только одна) -->
+                <HorizontalStackLayout Spacing="15" Margin="0,0,0,10">
+                    <Border StrokeShape="RoundRectangle 20" StrokeThickness="1" Stroke="#E0E0E0" BackgroundColor="White" WidthRequest="40" HeightRequest="40" Padding="0">
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnBackClicked" />
+                        </Border.GestureRecognizers>
+                        <Label Text="&lt;" FontSize="20" TextColor="#2B2D42" HorizontalOptions="Center" VerticalOptions="Center"/>
+                    </Border>
+                    <Label Text="Памятки" FontSize="20" FontAttributes="Bold" TextColor="#2B2D42" VerticalOptions="Center"/>
+                </HorizontalStackLayout>
+
+                <!-- Карточки (ваш код) -->
+                <Border StrokeShape="RoundRectangle 15" StrokeThickness="1" Stroke="#E0E0E0" BackgroundColor="White" Padding="15">
+                    <VerticalStackLayout Spacing="5">
+                        <Label Text="Как правильно кормить" FontSize="16" FontAttributes="Bold" TextColor="#2B2D42"/>
+                        <Label Text="Не давайте животным еду со своего стола..." FontSize="14" TextColor="#8D99AE"/>
+                    </VerticalStackLayout>
+                </Border>
+
+                <Border StrokeShape="RoundRectangle 15" StrokeThickness="1" Stroke="#E0E0E0" BackgroundColor="White" Padding="15">
+                    <VerticalStackLayout Spacing="5">
+                        <Label Text="Правила выгула" FontSize="16" FontAttributes="Bold" TextColor="#2B2D42"/>
+                        <Label Text="Всегда используйте поводок в общественных местах..." FontSize="14" TextColor="#8D99AE"/>
+                    </VerticalStackLayout>
+                </Border>
+
+                <Border StrokeShape="RoundRectangle 15" StrokeThickness="1" Stroke="#E0E0E0" BackgroundColor="White" Padding="15">
+                    <VerticalStackLayout Spacing="5">
+                        <Label Text="Первая помощь" FontSize="16" FontAttributes="Bold" TextColor="#2B2D42"/>
+                        <Label Text="Что делать, если животное поранилось..." FontSize="14" TextColor="#8D99AE"/>
+                    </VerticalStackLayout>
+                </Border>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- НИЖНЯЯ ПАНЕЛЬ -->
+        <Grid Grid.Row="1" BackgroundColor="White" ColumnDefinitions="*, *, *" Padding="0,10" HeightRequest="60">
+
+            <!-- Кнопка Животные -->
+            <VerticalStackLayout Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center">
+                <VerticalStackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnAnimalsTabClicked" />
+                </VerticalStackLayout.GestureRecognizers>
+                <Label Text="🐾" HorizontalOptions="Center" FontSize="20" TextColor="#6C757D"/>
+                <Label Text="Животные" FontSize="12" TextColor="#6C757D"/>
+            </VerticalStackLayout>
+
+            <!-- Кнопка Памятки (Активная) -->
+            <VerticalStackLayout Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center">
+                <Label Text="📋" HorizontalOptions="Center" FontSize="20" TextColor="#B84A00"/>
+                <Label Text="Памятки" FontSize="12" TextColor="#B84A00" FontAttributes="Bold"/>
+            </VerticalStackLayout>
+
+            <!-- Кнопка Как помочь -->
+            <VerticalStackLayout Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center">
+                <VerticalStackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnHelpTabClicked" />
+                </VerticalStackLayout.GestureRecognizers>
+                <Label Text="❤️" HorizontalOptions="Center" FontSize="20" TextColor="#6C757D"/>
+                <Label Text="Как помочь" FontSize="12" TextColor="#6C757D"/>
+            </VerticalStackLayout>
+        </Grid>
+
+    </Grid>
+</ContentPage>
