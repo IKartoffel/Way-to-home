@@ -5,115 +5,77 @@
              BackgroundColor="#FEF8EE"
              Shell.NavBarIsVisible="False">
 
-    <!-- Сетка из 2 строк: 1-я растягивается (*), 2-я по размеру контента (Auto) -->
-    <Grid RowDefinitions="*, Auto">
-        <!-- СТРЕЛОЧКА НАЗАД -->
-        <HorizontalStackLayout Spacing="15" Margin="0,0,0,10">
-            <Border StrokeShape="RoundRectangle 20" StrokeThickness="1" Stroke="#E0E0E0" BackgroundColor="White" WidthRequest="40" HeightRequest="40" Padding="0">
-                <Border.GestureRecognizers>
-                    <!-- Вызываем метод OnBackClicked -->
-                    <TapGestureRecognizer Tapped="OnBackClicked" />
-                </Border.GestureRecognizers>
-                <Label Text="&lt;" FontSize="20" TextColor="#2B2D42" HorizontalOptions="Center" VerticalOptions="Center"/>
-            </Border>
-            <!-- Если у вас тут уже есть заголовок "Найди друга", этот Label можно убрать -->
-        </HorizontalStackLayout>
+    <!-- Основная сетка: строка Auto для шапки, строка * для списка -->
+    <Grid RowDefinitions="Auto, *" Padding="20, 30, 20, 20">
 
-        <!-- ВЕРХНЯЯ ЧАСТЬ (Прокручиваемая) -->
-        <ScrollView Grid.Row="0">
-            <VerticalStackLayout Padding="20, 30, 20, 20" Spacing="20">
+        <!-- ВЕРХНЯЯ ЧАСТЬ (Шапка) -->
+        <VerticalStackLayout Grid.Row="0" Spacing="20" Margin="0,0,0,10">
 
-                <!-- 1. ЗАГОЛОВОК -->
-                <VerticalStackLayout Spacing="5">
-                    <Label Text="Найди друга" FontSize="26" FontAttributes="Bold" TextColor="#2B2D42"/>
-                    <Label Text="Подробные анкеты животных из приюта" FontSize="14" TextColor="#6C757D"/>
-                </VerticalStackLayout>
-
-                <!-- 2. ФИЛЬТРЫ -->
-                <Border StrokeShape="RoundRectangle 20" BackgroundColor="Transparent" Stroke="#D1D1D1" StrokeThickness="1" Padding="15,8" HorizontalOptions="Start">
+            <!-- СТРЕЛКА НАЗАД И ЗАГОЛОВОК -->
+            <HorizontalStackLayout Spacing="15">
+                <Border StrokeShape="RoundRectangle 20" StrokeThickness="1" Stroke="#E0E0E0" BackgroundColor="White" WidthRequest="40" HeightRequest="40" Padding="0" VerticalOptions="Center">
                     <Border.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="OnFiltersClicked" />
+                        <TapGestureRecognizer Tapped="OnBackClicked" />
                     </Border.GestureRecognizers>
-                    <Label Text="Фильтры" TextColor="#2B2D42" FontSize="14"/>
+                    <Label Text="&lt;" FontSize="20" TextColor="#2B2D42" HorizontalOptions="Center" VerticalOptions="Center"/>
                 </Border>
+            </HorizontalStackLayout>
 
-                <!-- 3. СТРОКА СОРТИРОВКИ -->
-                <Grid ColumnDefinitions="*, Auto" Margin="0,5,0,0">
-                    <Label Grid.Column="0" Text="Найдено анкет: 3" TextColor="#6C757D" FontSize="14" VerticalOptions="Center"/>
-                    <HorizontalStackLayout Grid.Column="1" Spacing="5" VerticalOptions="Center">
-                        <Label Text="≡" TextColor="#B84A00" FontSize="18" FontAttributes="Bold"/>
-                        <Label Text="Сортировка" TextColor="#B84A00" FontSize="14" FontAttributes="Bold"/>
-                    </HorizontalStackLayout>
-                </Grid>
-
-                <!-- 4. СПИСОК КАРТОЧЕК (CollectionView) -->
-                <CollectionView x:Name="PetsCollectionView" SelectionMode="None">
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate>
-                            <Border StrokeShape="RoundRectangle 15" StrokeThickness="1" Stroke="#EAEAEA" BackgroundColor="White" Padding="15" Margin="0,0,0,15">
-                                <Border.GestureRecognizers>
-                                    <TapGestureRecognizer Tapped="OnPetTapped" />
-                                </Border.GestureRecognizers>
-
-                                <Grid ColumnDefinitions="100, *" ColumnSpacing="15">
-                                    <Border Grid.Column="0" StrokeShape="RoundRectangle 10" HeightRequest="100" StrokeThickness="0">
-                                        <Image Source="{Binding ImagePath}" Aspect="AspectFill" />
-                                    </Border>
-
-                                    <VerticalStackLayout Grid.Column="1" Spacing="5" VerticalOptions="Center">
-                                        <Label Text="{Binding Name}" FontSize="20" FontAttributes="Bold" TextColor="#2B2D42"/>
-                                        <HorizontalStackLayout Spacing="3">
-                                            <Label Text="{Binding Type}" FontSize="14" TextColor="#6C757D"/>
-                                            <Label Text="·" FontSize="14" TextColor="#6C757D"/>
-                                            <Label Text="{Binding Age}" FontSize="14" TextColor="#6C757D"/>
-                                            <Label Text="·" FontSize="14" TextColor="#6C757D"/>
-                                            <Label Text="{Binding Size}" FontSize="14" TextColor="#6C757D"/>
-                                        </HorizontalStackLayout>
-                                        <HorizontalStackLayout Spacing="5" Margin="0,5,0,0">
-                                            <Border StrokeShape="RoundRectangle 10" BackgroundColor="#FCEAC2" Padding="10,4" StrokeThickness="0">
-                                                <Label Text="{Binding Tag1}" TextColor="#2B2D42" FontSize="12"/>
-                                            </Border>
-                                            <Border StrokeShape="RoundRectangle 10" BackgroundColor="#FCEAC2" Padding="10,4" StrokeThickness="0">
-                                                <Label Text="{Binding Tag2}" TextColor="#2B2D42" FontSize="12"/>
-                                            </Border>
-                                        </HorizontalStackLayout>
-                                    </VerticalStackLayout>
-                                </Grid>
-                            </Border>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
-
-            </VerticalStackLayout>
-        </ScrollView>
-
-        <!-- НИЖНЯЯ ПАНЕЛЬ (Прижата к низу) -->
-        <Grid Grid.Row="1" BackgroundColor="White" ColumnDefinitions="*, *, *" Padding="0,10" HeightRequest="60">
-
-            <!-- Кнопка Животные (активная) -->
-            <VerticalStackLayout Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center">
-                <Label Text="🐾" HorizontalOptions="Center" FontSize="20" TextColor="#B84A00"/>
-                <Label Text="Животные" FontSize="12" TextColor="#B84A00" FontAttributes="Bold"/>
+            <!-- ЗАГОЛОВОК -->
+            <VerticalStackLayout Spacing="5" Margin="0,-10,0,0">
+                <Label Text="Найди друга" FontSize="26" FontAttributes="Bold" TextColor="#2B2D42"/>
+                <Label Text="Подробные анкеты животных из приюта" FontSize="14" TextColor="#6C757D"/>
             </VerticalStackLayout>
 
-            <!-- Кнопка Памятки -->
-            <VerticalStackLayout Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center">
-                <VerticalStackLayout.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="OnMemoTabClicked" />
-                </VerticalStackLayout.GestureRecognizers>
-                <Label Text="📋" HorizontalOptions="Center" FontSize="20" TextColor="#6C757D"/>
-                <Label Text="Памятки" FontSize="12" TextColor="#6C757D"/>
-            </VerticalStackLayout>
+            <!-- ФИЛЬТРЫ -->
+            <Border StrokeShape="RoundRectangle 20" BackgroundColor="Transparent" Stroke="#D1D1D1" StrokeThickness="1" Padding="15,8" HorizontalOptions="Start">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnFiltersClicked" />
+                </Border.GestureRecognizers>
+                <Label Text="Фильтры" TextColor="#2B2D42" FontSize="14"/>
+            </Border>
 
-            <!-- Кнопка Как помочь -->
-            <VerticalStackLayout Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center">
-                <VerticalStackLayout.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="OnHelpTabClicked" />
-                </VerticalStackLayout.GestureRecognizers>
-                <Label Text="❤️" HorizontalOptions="Center" FontSize="20" TextColor="#6C757D"/>
-                <Label Text="Как помочь" FontSize="12" TextColor="#6C757D"/>
-            </VerticalStackLayout>
-        </Grid>
+            <!-- СТРОКА СОРТИРОВКИ -->
+            <Grid ColumnDefinitions="*, Auto">
+                <Label Grid.Column="0" Text="Найдено анкет: 3" TextColor="#6C757D" FontSize="14" VerticalOptions="Center"/>
+                <HorizontalStackLayout Grid.Column="1" Spacing="5" VerticalOptions="Center">
+                    <Label Text="≡" TextColor="#B84A00" FontSize="18" FontAttributes="Bold"/>
+                    <Label Text="Сортировка" TextColor="#B84A00" FontSize="14" FontAttributes="Bold"/>
+                </HorizontalStackLayout>
+            </Grid>
+
+        </VerticalStackLayout>
+
+        <!-- СПИСОК КАРТОЧЕК (CollectionView теперь занимает всё оставшееся место и прокручивается сам) -->
+        <CollectionView Grid.Row="1" x:Name="PetsCollectionView" ItemsSource="{Binding FilteredPets}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Border StrokeShape="RoundRectangle 15" Stroke="#E0E0E0"
+                            BackgroundColor="White" Padding="15" Margin="0,5,0,5">
+                        <Grid ColumnDefinitions="Auto, *">
+
+                            <Image Source="{Binding ImagePath}" WidthRequest="80" HeightRequest="80" 
+                                   Aspect="AspectFill" />
+
+                            <VerticalStackLayout Grid.Column="1" Spacing="4" Margin="15,0,0,0" VerticalOptions="Center">
+                                <Label Text="{Binding Name}" FontAttributes="Bold" FontSize="18" />
+                                <Label FontSize="14" TextColor="#8D99AE">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="{Binding Type}" />
+                                            <Span Text=" • " />
+                                            <Span Text="{Binding Age}" />
+                                            <Span Text=" • " />
+                                            <Span Text="{Binding Size}" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                            </VerticalStackLayout>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
 
     </Grid>
 </ContentPage>

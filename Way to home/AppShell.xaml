@@ -7,8 +7,9 @@
     Shell.FlyoutBehavior="Disabled"
     Title="Way to home">
 
-    <ShellContent
-    Title="Главная"
-    ContentTemplate="{DataTemplate local:HomePage}"
-    Route="HomePage" />
+    <TabBar>
+        <ShellContent Title="Животные" Icon="paw.png" ContentTemplate="{DataTemplate local:AnimalsPage}" Route="AnimalsPage" />
+        <ShellContent Title="Памятки" Icon="memo.png" ContentTemplate="{DataTemplate local:MemoPage}" Route="MemoPage" />
+        <ShellContent Title="Как помочь" Icon="heart.png" ContentTemplate="{DataTemplate local:HelpPage}" Route="HelpPage" />
+    </TabBar>
 </Shell>

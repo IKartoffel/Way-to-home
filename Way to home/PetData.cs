@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+// Если Pet лежит в пространстве имен Way_to_home, эта строка не нужна.
+// Если вы перенесли Pet в Models, раскомментируйте: using Way_to_home.Models;
 
 namespace Way_to_home
 {
@@ -10,7 +12,7 @@ namespace Way_to_home
             new Pet
             {
                 Name = "Рикки",
-                ImagePath = "rikki.jpg",
+                ImagePath = "rikki.jpg", // Убедитесь, что такой файл есть в Resources/Images
                 Type = "Пёс",
                 Gender = "Мальчик",
                 Age = "2 года",
@@ -25,7 +27,7 @@ namespace Way_to_home
             new Pet
             {
                 Name = "Рыжий",
-                ImagePath = "rygiy.jpg",
+                ImagePath = "rygiy.jpg", // Убедитесь, что такой файл есть в Resources/Images
                 Type = "Кот",
                 Gender = "Мальчик",
                 Age = "4 года",
@@ -40,7 +42,7 @@ namespace Way_to_home
             new Pet
             {
                 Name = "Реджи",
-                ImagePath = "redgu.jpg",
+                ImagePath = "redgu.jpg", // Убедитесь, что такой файл есть в Resources/Images
                 Type = "Пёс",
                 Gender = "Мальчик",
                 Age = "3 года.",

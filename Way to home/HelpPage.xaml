@@ -4,18 +4,16 @@
              x:Class="Way_to_home.HelpPage"
              BackgroundColor="#FEF8EE"
              Shell.NavBarIsVisible="False">
-    <!-- 1. Отключаем стандартную фиолетовую шапку -->
 
-    <!-- 2. Меняем ScrollView на Grid с двумя строками -->
-    <Grid RowDefinitions="*, Auto">
+    <!-- Вся страница теперь занимает одну строку, прокрутка идет через ScrollView -->
+    <Grid RowDefinitions="*">
 
-        <!-- КОНТЕНТ (Прокручиваемый) -->
         <ScrollView Grid.Row="0">
             <VerticalStackLayout Padding="20, 30, 20, 20" Spacing="20">
 
-                <!-- ШАПКА С КНОПКОЙ НАЗАД (оставляем только одну) -->
-                <HorizontalStackLayout Spacing="15" Margin="0,0,0,10">
-                    <Border StrokeShape="RoundRectangle 20" StrokeThickness="1" Stroke="#E0E0E0" BackgroundColor="White" WidthRequest="40" HeightRequest="40" Padding="0">
+                <!-- 1. ШАПКА (Стрелка назад и Заголовок) -->
+                <HorizontalStackLayout Spacing="15">
+                    <Border StrokeShape="RoundRectangle 20" StrokeThickness="1" Stroke="#E0E0E0" BackgroundColor="White" WidthRequest="40" HeightRequest="40" Padding="0" VerticalOptions="Center">
                         <Border.GestureRecognizers>
                             <TapGestureRecognizer Tapped="OnBackClicked" />
                         </Border.GestureRecognizers>
@@ -24,14 +22,16 @@
                     <Label Text="Как помочь" FontSize="20" FontAttributes="Bold" TextColor="#2B2D42" VerticalOptions="Center"/>
                 </HorizontalStackLayout>
 
-                <!-- ЗАГОЛОВОК -->
+                <!-- 2. ЗАГОЛОВОК -->
                 <VerticalStackLayout Spacing="5">
-                    <Label Text="Как помочь приюту" FontSize="24" FontAttributes="Bold" TextColor="#2B2D42"/>
-                    <Label Text="Приюту сейчас нужно:" FontSize="14" TextColor="#8D99AE"/>
+                    <Label Text="Как помочь приюту" FontSize="26" FontAttributes="Bold" TextColor="#2B2D42"/>
+                    <Label Text="Приюту сейчас нужно:" FontSize="14" TextColor="#6C757D"/>
                 </VerticalStackLayout>
 
-                <!-- КАРТОЧКИ -->
+                <!-- 3. СПИСОК КАРТОЧЕК -->
                 <VerticalStackLayout Spacing="15">
+
+                    <!-- Карточка: Корм -->
                     <Border StrokeShape="RoundRectangle 15" StrokeThickness="1" Stroke="#E0E0E0" BackgroundColor="White" Padding="15">
                         <Grid ColumnDefinitions="*, Auto">
                             <VerticalStackLayout Grid.Column="0" Spacing="5">
@@ -44,6 +44,7 @@
                         </Grid>
                     </Border>
 
+                    <!-- Карточка: Лекарства -->
                     <Border StrokeShape="RoundRectangle 15" StrokeThickness="1" Stroke="#E0E0E0" BackgroundColor="White" Padding="15">
                         <Grid ColumnDefinitions="*, Auto">
                             <VerticalStackLayout Grid.Column="0" Spacing="5">
@@ -56,6 +57,7 @@
                         </Grid>
                     </Border>
 
+                    <!-- Карточка: Подстилки и пелёнки -->
                     <Border StrokeShape="RoundRectangle 15" StrokeThickness="1" Stroke="#E0E0E0" BackgroundColor="White" Padding="15">
                         <Grid ColumnDefinitions="*, Auto">
                             <VerticalStackLayout Grid.Column="0" Spacing="5">
@@ -68,6 +70,7 @@
                         </Grid>
                     </Border>
 
+                    <!-- Карточка: Волонтёры -->
                     <Border StrokeShape="RoundRectangle 15" StrokeThickness="1" Stroke="#E0E0E0" BackgroundColor="White" Padding="15">
                         <Grid ColumnDefinitions="*, Auto">
                             <VerticalStackLayout Grid.Column="0" Spacing="5">
@@ -80,44 +83,16 @@
                         </Grid>
                     </Border>
 
+                    <!-- Карточка: Как передать помощь -->
                     <Border StrokeShape="RoundRectangle 15" StrokeThickness="1" Stroke="#E0E0E0" BackgroundColor="White" Padding="15" Margin="0,10,0,0">
                         <VerticalStackLayout Spacing="5">
                             <Label Text="Как передать помощь" FontSize="16" FontAttributes="Bold" TextColor="#2B2D42"/>
                             <Label Text="[Адрес приюта, часы приёма, контакт]" FontSize="14" TextColor="#8D99AE"/>
                         </VerticalStackLayout>
                     </Border>
-                </VerticalStackLayout>
 
+                </VerticalStackLayout>
             </VerticalStackLayout>
         </ScrollView>
-
-        <!-- НИЖНЯЯ ПАНЕЛЬ (Прижата к низу) -->
-        <Grid Grid.Row="1" BackgroundColor="White" ColumnDefinitions="*, *, *" Padding="0,10" HeightRequest="60">
-
-            <!-- Кнопка Животные -->
-            <VerticalStackLayout Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center">
-                <VerticalStackLayout.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="OnAnimalsTabClicked" />
-                </VerticalStackLayout.GestureRecognizers>
-                <Label Text="🐾" HorizontalOptions="Center" FontSize="20" TextColor="#6C757D"/>
-                <Label Text="Животные" FontSize="12" TextColor="#6C757D"/>
-            </VerticalStackLayout>
-
-            <!-- Кнопка Памятки -->
-            <VerticalStackLayout Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center">
-                <VerticalStackLayout.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="OnMemoTabClicked" />
-                </VerticalStackLayout.GestureRecognizers>
-                <Label Text="📋" HorizontalOptions="Center" FontSize="20" TextColor="#6C757D"/>
-                <Label Text="Памятки" FontSize="12" TextColor="#6C757D"/>
-            </VerticalStackLayout>
-
-            <!-- Кнопка Как помочь (Активная) -->
-            <VerticalStackLayout Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center">
-                <Label Text="❤️" HorizontalOptions="Center" FontSize="20" TextColor="#B84A00"/>
-                <Label Text="Как помочь" FontSize="12" TextColor="#B84A00" FontAttributes="Bold"/>
-            </VerticalStackLayout>
-        </Grid>
-
     </Grid>
 </ContentPage>

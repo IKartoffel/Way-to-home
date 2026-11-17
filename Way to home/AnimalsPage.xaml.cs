@@ -1,20 +1,29 @@
+using Way_to_home.ViewModels; // Добавляем пространство имен для ViewModel
+
 namespace Way_to_home
 {
     public partial class AnimalsPage : ContentPage
     {
+        public AnimalsViewModel ViewModel { get; set; }
+
         public AnimalsPage()
         {
             InitializeComponent();
-            PetsCollectionView.ItemsSource = PetData.Pets;
+
+            // 1. Убираем строку: PetsCollectionView.ItemsSource = PetData.Pets;
+
+            ViewModel = new AnimalsViewModel();
+            BindingContext = ViewModel;
         }
 
         // Переход на фильтры
         private async void OnFiltersClicked(object sender, TappedEventArgs e)
         {
-            await Navigation.PushAsync(new FiltersPage());
+            // Передаем нашу ViewModel на страницу фильтров!
+            await Navigation.PushAsync(new FiltersPage(ViewModel));
         }
 
-        // Переход в анкету животного
+        // Переход в анкету животного (оставляем без изменений)
         private async void OnPetTapped(object sender, TappedEventArgs e)
         {
             var border = sender as Border;
@@ -26,7 +35,7 @@ namespace Way_to_home
             }
         }
 
-        // Стрелочка "Назад" (возвращает на Главный экран)
+        // Стрелочка "Назад"
         private async void OnBackClicked(object sender, TappedEventArgs e)
         {
             await Navigation.PopAsync();
@@ -35,18 +44,14 @@ namespace Way_to_home
         // Нижняя кнопка "Памятки"
         private async void OnMemoTabClicked(object sender, TappedEventArgs e)
         {
-            // 1. Возвращаемся в самый корень (на Главный экран)
             await Navigation.PopToRootAsync();
-            // 2. Сразу же открываем Памятки
             await Navigation.PushAsync(new MainPage());
         }
 
         // Нижняя кнопка "Как помочь"
         private async void OnHelpTabClicked(object sender, TappedEventArgs e)
         {
-            // 1. Возвращаемся в самый корень (на Главный экран)
             await Navigation.PopToRootAsync();
-            // 2. Открываем Как помочь
             await Navigation.PushAsync(new HelpPage());
         }
     }

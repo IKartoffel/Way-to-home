@@ -1,10 +1,11 @@
-﻿namespace Way_to_home
+﻿namespace Way_to_home;
+
+public partial class AppShell : Shell
 {
-    public partial class AppShell : Shell
+    public AppShell()
     {
-        public AppShell()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
+
+        Routing.RegisterRoute(nameof(FiltersPage), typeof(FiltersPage));
     }
 }
