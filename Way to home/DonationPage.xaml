@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Way_to_home.DonationPage"
+             BackgroundColor="#FEF8EE"
+             Shell.NavBarIsVisible="False">
+
+    <Grid RowDefinitions="Auto, *, Auto" Padding="20, 30, 20, 20">
+
+        <!-- Шапка -->
+        <HorizontalStackLayout Grid.Row="0" Spacing="15" Margin="0,0,0,20">
+            <Border StrokeShape="RoundRectangle 20" StrokeThickness="1" Stroke="#E0E0E0" BackgroundColor="White" WidthRequest="40" HeightRequest="40" Padding="0">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnBackClicked" />
+                </Border.GestureRecognizers>
+                <Label Text="&lt;" FontSize="20" TextColor="#2B2D42" HorizontalOptions="Center" VerticalOptions="Center"/>
+            </Border>
+            <Label Text="Пожертвование" FontSize="20" FontAttributes="Bold" TextColor="#2B2D42" VerticalOptions="Center"/>
+        </HorizontalStackLayout>
+
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Spacing="20">
+                <Label x:Name="GoalLabel" Text="Помощь приюту" FontSize="24" FontAttributes="Bold" TextColor="#2B2D42"/>
+                <Label Text="Выберите сумму, которую хотите пожертвовать:" FontSize="14" TextColor="#6C757D"/>
+
+                <!-- Выбор суммы -->
+                <FlexLayout Wrap="Wrap" JustifyContent="Start" AlignItems="Start" Margin="0,10,0,0">
+
+                    <Border x:Name="Chip100" StrokeShape="RoundRectangle 20" Stroke="#D1D1D1" StrokeThickness="1" BackgroundColor="Transparent" Padding="20,10" Margin="0,0,10,10">
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnAmountTapped" CommandParameter="100" />
+                        </Border.GestureRecognizers>
+                        <Label Text="100 ₽" TextColor="#2B2D42"/>
+                    </Border>
+
+                    <Border x:Name="Chip300" StrokeShape="RoundRectangle 20" Stroke="#D1D1D1" StrokeThickness="1" BackgroundColor="Transparent" Padding="20,10" Margin="0,0,10,10">
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnAmountTapped" CommandParameter="300" />
+                        </Border.GestureRecognizers>
+                        <Label Text="300 ₽" TextColor="#2B2D42"/>
+                    </Border>
+
+                    <Border x:Name="Chip500" StrokeShape="RoundRectangle 20" Stroke="#D1D1D1" StrokeThickness="1" BackgroundColor="Transparent" Padding="20,10" Margin="0,0,10,10">
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnAmountTapped" CommandParameter="500" />
+                        </Border.GestureRecognizers>
+                        <Label Text="500 ₽" TextColor="#2B2D42"/>
+                    </Border>
+
+                    <Border x:Name="Chip1000" StrokeShape="RoundRectangle 20" Stroke="#D1D1D1" StrokeThickness="1" BackgroundColor="Transparent" Padding="20,10" Margin="0,0,10,10">
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnAmountTapped" CommandParameter="1000" />
+                        </Border.GestureRecognizers>
+                        <Label Text="1000 ₽" TextColor="#2B2D42"/>
+                    </Border>
+                </FlexLayout>
+
+                <!-- Поле для своей суммы -->
+                <VerticalStackLayout Spacing="5" Margin="0,10,0,0">
+                    <Label Text="Или введите свою сумму:" FontSize="14" TextColor="#6C757D"/>
+                    <Entry x:Name="CustomAmountEntry" Keyboard="Numeric" Placeholder="Сумма в рублях" TextColor="#2B2D42" BackgroundColor="#FFFFFF" TextChanged="OnCustomAmountChanged"/>
+                </VerticalStackLayout>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- Кнопка оплаты -->
+        <VerticalStackLayout Grid.Row="2" Margin="0,20,0,0">
+            <Button x:Name="DonateButton" 
+                    Text="Пожертвовать 500 ₽" 
+                    Clicked="OnDonateClicked"
+                    BackgroundColor="#B84A00" 
+                    TextColor="White" 
+                    FontAttributes="Bold" 
+                    CornerRadius="20" 
+                    HeightRequest="55" />
+        </VerticalStackLayout>
+
+    </Grid>
+</ContentPage>

@@ -8,8 +8,32 @@
     Title="Way to home">
 
     <TabBar>
-        <ShellContent Title="Животные" Icon="paw.png" ContentTemplate="{DataTemplate local:AnimalsPage}" Route="AnimalsPage" />
-        <ShellContent Title="Памятки" Icon="memo.png" ContentTemplate="{DataTemplate local:MemoPage}" Route="MemoPage" />
-        <ShellContent Title="Как помочь" Icon="heart.png" ContentTemplate="{DataTemplate local:HelpPage}" Route="HelpPage" />
+        <!-- 1. Главная страница (HomePage) - стоит первой, значит с неё начнется запуск -->
+        <ShellContent
+            Title="Главная"
+            Icon="home.png" 
+            ContentTemplate="{DataTemplate local:HomePage}"
+            Route="HomePage" />
+
+        <!-- 2. Животные -->
+        <ShellContent
+            Title="Животные"
+            Icon="paw.png" 
+            ContentTemplate="{DataTemplate local:AnimalsPage}"
+            Route="AnimalsPage" />
+
+        <!-- 3. Памятки -->
+        <ShellContent
+            Title="Памятки"
+            Icon="memo.png" 
+            ContentTemplate="{DataTemplate local:MemoPage}"
+            Route="MemoPage" />
+
+        <!-- 4. Как помочь -->
+        <ShellContent
+            Title="Как помочь"
+            Icon="heart.png" 
+            ContentTemplate="{DataTemplate local:HelpPage}"
+            Route="HelpPage" />
     </TabBar>
 </Shell>

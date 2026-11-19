@@ -5,93 +5,108 @@
              BackgroundColor="#FEF8EE"
              Shell.NavBarIsVisible="False">
 
-    <!-- Вся страница теперь занимает одну строку, прокрутка идет через ScrollView -->
-    <Grid RowDefinitions="*">
+    <Grid RowDefinitions="Auto, *" Padding="20, 30, 20, 20">
 
-        <ScrollView Grid.Row="0">
-            <VerticalStackLayout Padding="20, 30, 20, 20" Spacing="20">
+        <!-- ШАПКА С КНОПКОЙ НАЗАД -->
+        <HorizontalStackLayout Grid.Row="0" Spacing="15" Margin="0,0,0,20">
+            <Border StrokeShape="RoundRectangle 20" StrokeThickness="1" Stroke="#E0E0E0" BackgroundColor="White" WidthRequest="40" HeightRequest="40" Padding="0">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnBackClicked" />
+                </Border.GestureRecognizers>
+                <Label Text="&lt;" FontSize="20" TextColor="#2B2D42" HorizontalOptions="Center" VerticalOptions="Center"/>
+            </Border>
+            <Label Text="Как помочь" FontSize="20" FontAttributes="Bold" TextColor="#2B2D42" VerticalOptions="Center"/>
+        </HorizontalStackLayout>
 
-                <!-- 1. ШАПКА (Стрелка назад и Заголовок) -->
-                <HorizontalStackLayout Spacing="15">
-                    <Border StrokeShape="RoundRectangle 20" StrokeThickness="1" Stroke="#E0E0E0" BackgroundColor="White" WidthRequest="40" HeightRequest="40" Padding="0" VerticalOptions="Center">
-                        <Border.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="OnBackClicked" />
-                        </Border.GestureRecognizers>
-                        <Label Text="&lt;" FontSize="20" TextColor="#2B2D42" HorizontalOptions="Center" VerticalOptions="Center"/>
-                    </Border>
-                    <Label Text="Как помочь" FontSize="20" FontAttributes="Bold" TextColor="#2B2D42" VerticalOptions="Center"/>
-                </HorizontalStackLayout>
+        <!-- СПИСОК НУЖД -->
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Spacing="20">
 
-                <!-- 2. ЗАГОЛОВОК -->
                 <VerticalStackLayout Spacing="5">
                     <Label Text="Как помочь приюту" FontSize="26" FontAttributes="Bold" TextColor="#2B2D42"/>
                     <Label Text="Приюту сейчас нужно:" FontSize="14" TextColor="#6C757D"/>
                 </VerticalStackLayout>
 
-                <!-- 3. СПИСОК КАРТОЧЕК -->
-                <VerticalStackLayout Spacing="15">
-
-                    <!-- Карточка: Корм -->
-                    <Border StrokeShape="RoundRectangle 15" StrokeThickness="1" Stroke="#E0E0E0" BackgroundColor="White" Padding="15">
-                        <Grid ColumnDefinitions="*, Auto">
-                            <VerticalStackLayout Grid.Column="0" Spacing="5">
-                                <Label Text="Корм" FontSize="16" FontAttributes="Bold" TextColor="#2B2D42"/>
-                                <Label Text="[вид и количество]" FontSize="14" TextColor="#8D99AE"/>
-                            </VerticalStackLayout>
-                            <Border Grid.Column="1" StrokeShape="RoundRectangle 10" BackgroundColor="#F4A261" Padding="10,5" VerticalOptions="Center">
-                                <Label Text="Нужно" TextColor="White" FontSize="12" FontAttributes="Bold"/>
-                            </Border>
-                        </Grid>
-                    </Border>
-
-                    <!-- Карточка: Лекарства -->
-                    <Border StrokeShape="RoundRectangle 15" StrokeThickness="1" Stroke="#E0E0E0" BackgroundColor="White" Padding="15">
-                        <Grid ColumnDefinitions="*, Auto">
-                            <VerticalStackLayout Grid.Column="0" Spacing="5">
-                                <Label Text="Лекарства" FontSize="16" FontAttributes="Bold" TextColor="#2B2D42"/>
-                                <Label Text="[название, количество]" FontSize="14" TextColor="#8D99AE"/>
-                            </VerticalStackLayout>
-                            <Border Grid.Column="1" StrokeShape="RoundRectangle 10" BackgroundColor="#F4A261" Padding="10,5" VerticalOptions="Center">
-                                <Label Text="Нужно" TextColor="White" FontSize="12" FontAttributes="Bold"/>
-                            </Border>
-                        </Grid>
-                    </Border>
-
-                    <!-- Карточка: Подстилки и пелёнки -->
-                    <Border StrokeShape="RoundRectangle 15" StrokeThickness="1" Stroke="#E0E0E0" BackgroundColor="White" Padding="15">
-                        <Grid ColumnDefinitions="*, Auto">
-                            <VerticalStackLayout Grid.Column="0" Spacing="5">
-                                <Label Text="Подстилки и пелёнки" FontSize="16" FontAttributes="Bold" TextColor="#2B2D42"/>
-                                <Label Text="[количество]" FontSize="14" TextColor="#8D99AE"/>
-                            </VerticalStackLayout>
-                            <Border Grid.Column="1" StrokeShape="RoundRectangle 10" BackgroundColor="#F4A261" Padding="10,5" VerticalOptions="Center">
-                                <Label Text="Нужно" TextColor="White" FontSize="12" FontAttributes="Bold"/>
-                            </Border>
-                        </Grid>
-                    </Border>
-
-                    <!-- Карточка: Волонтёры -->
-                    <Border StrokeShape="RoundRectangle 15" StrokeThickness="1" Stroke="#E0E0E0" BackgroundColor="White" Padding="15">
-                        <Grid ColumnDefinitions="*, Auto">
-                            <VerticalStackLayout Grid.Column="0" Spacing="5">
-                                <Label Text="Волонтёры" FontSize="16" FontAttributes="Bold" TextColor="#2B2D42"/>
-                                <Label Text="[помощь на выгуле, уборке]" FontSize="14" TextColor="#8D99AE"/>
-                            </VerticalStackLayout>
-                            <Border Grid.Column="1" StrokeShape="RoundRectangle 10" BackgroundColor="#F4A261" Padding="10,5" VerticalOptions="Center">
-                                <Label Text="Нужно" TextColor="White" FontSize="12" FontAttributes="Bold"/>
-                            </Border>
-                        </Grid>
-                    </Border>
-
-                    <!-- Карточка: Как передать помощь -->
-                    <Border StrokeShape="RoundRectangle 15" StrokeThickness="1" Stroke="#E0E0E0" BackgroundColor="White" Padding="15" Margin="0,10,0,0">
-                        <VerticalStackLayout Spacing="5">
-                            <Label Text="Как передать помощь" FontSize="16" FontAttributes="Bold" TextColor="#2B2D42"/>
-                            <Label Text="[Адрес приюта, часы приёма, контакт]" FontSize="14" TextColor="#8D99AE"/>
+                <!-- КАРТОЧКА 1: Корм -->
+                <Border StrokeShape="RoundRectangle 15" StrokeThickness="1" Stroke="#E0E0E0" BackgroundColor="White" Padding="15">
+                    <Grid ColumnDefinitions="*, Auto">
+                        <VerticalStackLayout Grid.Column="0" Spacing="5">
+                            <Label Text="Корм" FontSize="16" FontAttributes="Bold" TextColor="#2B2D42"/>
+                            <Label Text="Сухой корм для собак и кошек (10 кг)" FontSize="14" TextColor="#8D99AE"/>
                         </VerticalStackLayout>
-                    </Border>
 
-                </VerticalStackLayout>
+                        <!-- Кнопка Нужно -->
+                        <Border Grid.Column="1" StrokeShape="RoundRectangle 10" BackgroundColor="#F4A261" Padding="10,5" VerticalOptions="Center">
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnNeedClicked" CommandParameter="Корм" />
+                            </Border.GestureRecognizers>
+                            <Label Text="Нужно" TextColor="White" FontSize="12" FontAttributes="Bold"/>
+                        </Border>
+                    </Grid>
+                </Border>
+
+                <!-- КАРТОЧКА 2: Лекарства -->
+                <Border StrokeShape="RoundRectangle 15" StrokeThickness="1" Stroke="#E0E0E0" BackgroundColor="White" Padding="15">
+                    <Grid ColumnDefinitions="*, Auto">
+                        <VerticalStackLayout Grid.Column="0" Spacing="5">
+                            <Label Text="Лекарства" FontSize="16" FontAttributes="Bold" TextColor="#2B2D42"/>
+                            <Label Text="Капли от блох, антибиотики, бинты" FontSize="14" TextColor="#8D99AE"/>
+                        </VerticalStackLayout>
+
+                        <!-- Кнопка Нужно -->
+                        <Border Grid.Column="1" StrokeShape="RoundRectangle 10" BackgroundColor="#F4A261" Padding="10,5" VerticalOptions="Center">
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnNeedClicked" CommandParameter="Лекарства" />
+                            </Border.GestureRecognizers>
+                            <Label Text="Нужно" TextColor="White" FontSize="12" FontAttributes="Bold"/>
+                        </Border>
+                    </Grid>
+                </Border>
+
+                <!-- КАРТОЧКА 3: Подстилки и пелёнки -->
+                <Border StrokeShape="RoundRectangle 15" StrokeThickness="1" Stroke="#E0E0E0" BackgroundColor="White" Padding="15">
+                    <Grid ColumnDefinitions="*, Auto">
+                        <VerticalStackLayout Grid.Column="0" Spacing="5">
+                            <Label Text="Подстилки и пелёнки" FontSize="16" FontAttributes="Bold" TextColor="#2B2D42"/>
+                            <Label Text="Одноразовые пелёнки (100 шт.)" FontSize="14" TextColor="#8D99AE"/>
+                        </VerticalStackLayout>
+
+                        <!-- Кнопка Нужно -->
+                        <Border Grid.Column="1" StrokeShape="RoundRectangle 10" BackgroundColor="#F4A261" Padding="10,5" VerticalOptions="Center">
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnNeedClicked" CommandParameter="Подстилки" />
+                            </Border.GestureRecognizers>
+                            <Label Text="Нужно" TextColor="White" FontSize="12" FontAttributes="Bold"/>
+                        </Border>
+                    </Grid>
+                </Border>
+
+                <!-- КАРТОЧКА 4: Волонтёры -->
+                <Border StrokeShape="RoundRectangle 15" StrokeThickness="1" Stroke="#E0E0E0" BackgroundColor="White" Padding="15">
+                    <Grid ColumnDefinitions="*, Auto">
+                        <VerticalStackLayout Grid.Column="0" Spacing="5">
+                            <Label Text="Волонтёры" FontSize="16" FontAttributes="Bold" TextColor="#2B2D42"/>
+                            <Label Text="Помощь на выгуле собак по выходным" FontSize="14" TextColor="#8D99AE"/>
+                        </VerticalStackLayout>
+
+                        <!-- Кнопка Нужно -->
+                        <Border Grid.Column="1" StrokeShape="RoundRectangle 10" BackgroundColor="#F4A261" Padding="10,5" VerticalOptions="Center">
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnNeedClicked" CommandParameter="Волонтёры" />
+                            </Border.GestureRecognizers>
+                            <Label Text="Нужно" TextColor="White" FontSize="12" FontAttributes="Bold"/>
+                        </Border>
+                    </Grid>
+                </Border>
+
+                <!-- КАРТОЧКА 5: Информационная (без кнопки) -->
+                <Border StrokeShape="RoundRectangle 15" StrokeThickness="1" Stroke="#E0E0E0" BackgroundColor="White" Padding="15" Margin="0,10,0,0">
+                    <VerticalStackLayout Spacing="5">
+                        <Label Text="Как передать помощь" FontSize="16" FontAttributes="Bold" TextColor="#2B2D42"/>
+                        <Label Text="г. Москва, ул. Приютская, д. 10. Ежедневно с 10:00 до 19:00. Тел: +7 (999) 123-45-67" FontSize="14" TextColor="#8D99AE"/>
+                    </VerticalStackLayout>
+                </Border>
+
             </VerticalStackLayout>
         </ScrollView>
     </Grid>

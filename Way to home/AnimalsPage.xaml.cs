@@ -26,7 +26,10 @@ namespace Way_to_home
         // Переход в анкету животного (оставляем без изменений)
         private async void OnPetTapped(object sender, TappedEventArgs e)
         {
+            // Сначала получаем Border (карточку), по которой нажали
             var border = sender as Border;
+
+            // Теперь достаем из нее данные о животном
             var selectedPet = border?.BindingContext as Pet;
 
             if (selectedPet != null)
@@ -38,14 +41,14 @@ namespace Way_to_home
         // Стрелочка "Назад"
         private async void OnBackClicked(object sender, TappedEventArgs e)
         {
-            await Navigation.PopAsync();
+            await Shell.Current.GoToAsync("//HomePage");
         }
 
         // Нижняя кнопка "Памятки"
         private async void OnMemoTabClicked(object sender, TappedEventArgs e)
         {
             await Navigation.PopToRootAsync();
-            await Navigation.PushAsync(new MainPage());
+            await Navigation.PushAsync(new MemoPage());
         }
 
         // Нижняя кнопка "Как помочь"

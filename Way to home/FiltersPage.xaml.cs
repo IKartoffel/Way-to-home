@@ -5,68 +5,106 @@ namespace Way_to_home;
 public partial class FiltersPage : ContentPage
 {
     private AnimalsViewModel _viewModel;
-    private string _selectedType = "Все";
 
-    // Мы ожидаем, что ViewModel передадут из AnimalsPage
     public FiltersPage(AnimalsViewModel viewModel)
     {
         InitializeComponent();
         _viewModel = viewModel;
+
+        RestoreFilterState(); // Восстанавливаем визуал при открытии
     }
 
-    // 1. Нажатие на стрелку "Назад"
+    private void OnTypeFilterTapped(object sender, TappedEventArgs e)
+    {
+        if (sender is Border border && e.Parameter != null)
+        {
+            _viewModel.CurrentTypeFilter = e.Parameter.ToString();
+            ResetAllTypeChips();
+            SetChipStyleActive(border);
+        }
+    }
+
+    private void OnAgeFilterTapped(object sender, TappedEventArgs e)
+    {
+        if (sender is Border border && e.Parameter != null)
+        {
+            _viewModel.CurrentAgeFilter = e.Parameter.ToString();
+            ResetAllAgeChips();
+            SetChipStyleActive(border);
+        }
+    }
+
+    private void OnSizeFilterTapped(object sender, TappedEventArgs e)
+    {
+        if (sender is Border border && e.Parameter != null)
+        {
+            _viewModel.CurrentSizeFilter = e.Parameter.ToString();
+            ResetAllSizeChips();
+            SetChipStyleActive(border);
+        }
+    }
+
+    private async void OnApplyFiltersClicked(object sender, TappedEventArgs e)
+    {
+        _viewModel.ApplyFilters();
+        await Navigation.PopAsync();
+    }
+
+    private async void OnResetFiltersClicked(object sender, TappedEventArgs e)
+    {
+        _viewModel.CurrentTypeFilter = "Все";
+        _viewModel.CurrentAgeFilter = "Любой";
+        _viewModel.CurrentSizeFilter = "Любой";
+
+        _viewModel.ResetFilters(); // Возвращаем всех животных
+        RestoreFilterState();      // Красим дефолтные кнопки
+        await Navigation.PopAsync();
+    }
+
     private async void OnBackClicked(object sender, TappedEventArgs e)
     {
         await Navigation.PopAsync();
     }
 
-    // 2. Нажатие на чипы Вида (Собаки, Кошки, Все)
-    private void OnTypeFilterTapped(object sender, TappedEventArgs e)
+    // --- ВСПОМОГАТЕЛЬНЫЕ МЕТОДЫ ---
+
+    private void RestoreFilterState()
     {
-        var border = sender as Border;
-        if (border != null && e.Parameter != null)
-        {
-            _selectedType = e.Parameter.ToString();
+        ResetAllTypeChips();
+        ResetAllAgeChips();
+        ResetAllSizeChips();
 
-            // Сбрасываем визуальное выделение у всех
-            ResetChipStyle(ChipTypeAll);
-            ResetChipStyle(ChipTypeDogs);
-            ResetChipStyle(ChipTypeCats);
+        // Вид
+        if (_viewModel.CurrentTypeFilter == "Собаки") SetChipStyleActive(ChipTypeDogs);
+        else if (_viewModel.CurrentTypeFilter == "Коты") SetChipStyleActive(ChipTypeCats);
+        else SetChipStyleActive(ChipTypeAll);
 
-            // Выделяем нажатый
-            SetChipStyleActive(border);
-        }
+        // Возраст
+        if (_viewModel.CurrentAgeFilter == "До 1 года") SetChipStyleActive(ChipAgeUpTo1);
+        else if (_viewModel.CurrentAgeFilter == "1–7 лет") SetChipStyleActive(ChipAge1To7);
+        else if (_viewModel.CurrentAgeFilter == "Старше 7") SetChipStyleActive(ChipAgeOver7);
+        else SetChipStyleActive(ChipAgeAny);
+
+        // Размер
+        if (_viewModel.CurrentSizeFilter == "Малый") SetChipStyleActive(ChipSizeSmall);
+        else if (_viewModel.CurrentSizeFilter == "Средний") SetChipStyleActive(ChipSizeMedium);
+        else if (_viewModel.CurrentSizeFilter == "Крупный") SetChipStyleActive(ChipSizeLarge);
+        else SetChipStyleActive(ChipSizeAny);
     }
 
-    // 3. Нажатие на "Показать анкеты"
-    private async void OnApplyFiltersClicked(object sender, TappedEventArgs e)
+    private void ResetAllTypeChips()
     {
-        // Передаем выбранные данные в нашу ViewModel
-        _viewModel.CurrentTypeFilter = _selectedType;
-        // Здесь также нужно будет передать возраст, размер и т.д.
-
-        // Применяем фильтр
-        _viewModel.ApplyFilters();
-
-        // Возвращаемся на список
-        await Navigation.PopAsync();
+        ResetChipStyle(ChipTypeAll); ResetChipStyle(ChipTypeDogs); ResetChipStyle(ChipTypeCats);
+    }
+    private void ResetAllAgeChips()
+    {
+        ResetChipStyle(ChipAgeAny); ResetChipStyle(ChipAgeUpTo1); ResetChipStyle(ChipAge1To7); ResetChipStyle(ChipAgeOver7);
+    }
+    private void ResetAllSizeChips()
+    {
+        ResetChipStyle(ChipSizeAny); ResetChipStyle(ChipSizeSmall); ResetChipStyle(ChipSizeMedium); ResetChipStyle(ChipSizeLarge);
     }
 
-    // 4. Нажатие на "Сбросить"
-    private async void OnResetFiltersClicked(object sender, TappedEventArgs e)
-    {
-        _selectedType = "Все";
-
-        ResetChipStyle(ChipTypeDogs);
-        ResetChipStyle(ChipTypeCats);
-        SetChipStyleActive(ChipTypeAll);
-
-        _viewModel.ResetFilters(); // Сброс в ViewModel
-
-        await Navigation.PopAsync();
-    }
-
-    // --- Вспомогательные методы для смены цвета чипов ---
     private void SetChipStyleActive(Border chip)
     {
         chip.BackgroundColor = Color.FromArgb("#B84A00");

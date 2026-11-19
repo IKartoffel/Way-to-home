@@ -1,30 +1,26 @@
-namespace Way_to_home
+namespace Way_to_home;
+
+public partial class HelpPage : ContentPage
 {
-    public partial class HelpPage : ContentPage
+    public HelpPage()
     {
-        public HelpPage()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
+    }
 
-        // Стрелочка "Назад" на Главный экран
-        private async void OnBackClicked(object sender, TappedEventArgs e)
+    // Переход на страницу пожертвования
+    private async void OnNeedClicked(object sender, TappedEventArgs e)
+    {
+        if (e.Parameter != null)
         {
-            await Navigation.PopAsync();
+            string needItem = e.Parameter.ToString();
+            // Передаем название нужды (Корм, Лекарства и т.д.) на страницу DonationPage
+            await Navigation.PushAsync(new DonationPage(needItem));
         }
+    }
 
-        // Кнопка "Животные" на нижней панели
-        private async void OnAnimalsTabClicked(object sender, TappedEventArgs e)
-        {
-            await Navigation.PopToRootAsync();
-            await Navigation.PushAsync(new AnimalsPage());
-        }
-
-        // Кнопка "Памятки" на нижней панели
-        private async void OnMemoTabClicked(object sender, TappedEventArgs e)
-        {
-            await Navigation.PopToRootAsync();
-            await Navigation.PushAsync(new MainPage());
-        }
+    // Возврат назад (на Главную)
+    private async void OnBackClicked(object sender, TappedEventArgs e)
+    {
+        await Shell.Current.GoToAsync("//HomePage");
     }
 }

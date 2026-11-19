@@ -37,7 +37,7 @@
 
             <!-- СТРОКА СОРТИРОВКИ -->
             <Grid ColumnDefinitions="*, Auto">
-                <Label Grid.Column="0" Text="Найдено анкет: 3" TextColor="#6C757D" FontSize="14" VerticalOptions="Center"/>
+                <Label Grid.Column="0" Text="{Binding FilteredPetsCount, StringFormat='Найдено анкет: {0}'}" TextColor="#6C757D" FontSize="14" VerticalOptions="Center"/>
                 <HorizontalStackLayout Grid.Column="1" Spacing="5" VerticalOptions="Center">
                     <Label Text="≡" TextColor="#B84A00" FontSize="18" FontAttributes="Bold"/>
                     <Label Text="Сортировка" TextColor="#B84A00" FontSize="14" FontAttributes="Bold"/>
@@ -46,17 +46,27 @@
 
         </VerticalStackLayout>
 
-        <!-- СПИСОК КАРТОЧЕК (CollectionView теперь занимает всё оставшееся место и прокручивается сам) -->
+        <!-- СПИСОК КАРТОЧЕК -->
         <CollectionView Grid.Row="1" x:Name="PetsCollectionView" ItemsSource="{Binding FilteredPets}">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Border StrokeShape="RoundRectangle 15" Stroke="#E0E0E0"
                             BackgroundColor="White" Padding="15" Margin="0,5,0,5">
+
+                        <!-- Обработчик нажатия на карточку -->
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnPetTapped" />
+                        </Border.GestureRecognizers>
+
+                        <!-- Правильная сетка: Картинка слева, текст справа -->
                         <Grid ColumnDefinitions="Auto, *">
 
-                            <Image Source="{Binding ImagePath}" WidthRequest="80" HeightRequest="80" 
+                            <!-- Картинка -->
+                            <Image Source="{Binding ImagePath}" 
+                                   WidthRequest="80" HeightRequest="80" 
                                    Aspect="AspectFill" />
 
+                            <!-- Текст -->
                             <VerticalStackLayout Grid.Column="1" Spacing="4" Margin="15,0,0,0" VerticalOptions="Center">
                                 <Label Text="{Binding Name}" FontAttributes="Bold" FontSize="18" />
                                 <Label FontSize="14" TextColor="#8D99AE">
@@ -71,6 +81,7 @@
                                     </Label.FormattedText>
                                 </Label>
                             </VerticalStackLayout>
+
                         </Grid>
                     </Border>
                 </DataTemplate>

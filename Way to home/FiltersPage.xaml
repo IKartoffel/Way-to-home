@@ -20,19 +20,21 @@
 
         <!-- СПИСОК ФИЛЬТРОВ -->
         <ScrollView Grid.Row="1">
-            <VerticalStackLayout Spacing="20">
+            <VerticalStackLayout Spacing="25">
 
                 <!-- Вид -->
                 <VerticalStackLayout Spacing="10">
                     <Label Text="Вид" FontAttributes="Bold" TextColor="#2B2D42" FontSize="16"/>
                     <FlexLayout Wrap="Wrap" JustifyContent="Start" AlignItems="Start">
+
                         <!-- Чип "Все" -->
-                        <Border x:Name="ChipTypeAll" StrokeShape="RoundRectangle 20" BackgroundColor="#B84A00" Padding="15,8" Margin="0,0,10,10">
+                        <Border x:Name="ChipTypeAll" StrokeShape="RoundRectangle 20" Stroke="#D1D1D1" StrokeThickness="1" BackgroundColor="Transparent" Padding="15,8" Margin="0,0,10,10">
                             <Border.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="OnTypeFilterTapped" CommandParameter="Все" />
                             </Border.GestureRecognizers>
-                            <Label Text="Все" TextColor="White" FontAttributes="Bold"/>
+                            <Label Text="Все" TextColor="#2B2D42"/>
                         </Border>
+
                         <!-- Чип "Собаки" -->
                         <Border x:Name="ChipTypeDogs" StrokeShape="RoundRectangle 20" Stroke="#D1D1D1" StrokeThickness="1" Padding="15,8" Margin="0,0,10,10" BackgroundColor="Transparent">
                             <Border.GestureRecognizers>
@@ -40,30 +42,53 @@
                             </Border.GestureRecognizers>
                             <Label Text="Собаки" TextColor="#2B2D42"/>
                         </Border>
-                        <!-- Чип "Кошки" -->
+
+                        <!-- Чип "Коты" -->
                         <Border x:Name="ChipTypeCats" StrokeShape="RoundRectangle 20" Stroke="#D1D1D1" StrokeThickness="1" Padding="15,8" Margin="0,0,10,10" BackgroundColor="Transparent">
                             <Border.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="OnTypeFilterTapped" CommandParameter="Кошки" />
+                                <TapGestureRecognizer Tapped="OnTypeFilterTapped" CommandParameter="Коты" />
                             </Border.GestureRecognizers>
-                            <Label Text="Кошки" TextColor="#2B2D42"/>
+                            <Label Text="Коты" TextColor="#2B2D42"/>
                         </Border>
                     </FlexLayout>
                 </VerticalStackLayout>
-
-                <!-- (Остальные фильтры - Возраст, Размер и т.д. - пока оставляем как есть для наглядности, 
-                     в будущем им тоже нужно будет добавить TapGestureRecognizer по аналогии с Видом) -->
 
                 <!-- Возраст -->
                 <VerticalStackLayout Spacing="10">
                     <Label Text="Возраст" FontAttributes="Bold" TextColor="#2B2D42" FontSize="16"/>
                     <FlexLayout Wrap="Wrap">
-                        <Border StrokeShape="RoundRectangle 20" BackgroundColor="#B84A00" Padding="15,8" Margin="0,0,10,10">
-                            <Label Text="Любой" TextColor="White" FontAttributes="Bold"/>
+
+                        <!-- Чип "Любой" -->
+                        <Border x:Name="ChipAgeAny" StrokeShape="RoundRectangle 20" Stroke="#D1D1D1" StrokeThickness="1" BackgroundColor="Transparent" Padding="15,8" Margin="0,0,10,10">
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnAgeFilterTapped" CommandParameter="Любой" />
+                            </Border.GestureRecognizers>
+                            <Label Text="Любой" TextColor="#2B2D42"/>
                         </Border>
-                        <Border StrokeShape="RoundRectangle 20" Stroke="#D1D1D1" StrokeThickness="1" Padding="15,8" Margin="0,0,10,10">
+
+                        <!-- Чип "До 1 года" -->
+                        <Border x:Name="ChipAgeUpTo1" StrokeShape="RoundRectangle 20" Stroke="#D1D1D1" StrokeThickness="1" Padding="15,8" Margin="0,0,10,10" BackgroundColor="Transparent">
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnAgeFilterTapped" CommandParameter="До 1 года" />
+                            </Border.GestureRecognizers>
                             <Label Text="До 1 года" TextColor="#2B2D42"/>
                         </Border>
-                        <!-- ... другие чипы возраста ... -->
+
+                        <!-- Чип "1–7 лет" -->
+                        <Border x:Name="ChipAge1To7" StrokeShape="RoundRectangle 20" Stroke="#D1D1D1" StrokeThickness="1" Padding="15,8" Margin="0,0,10,10" BackgroundColor="Transparent">
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnAgeFilterTapped" CommandParameter="1–7 лет" />
+                            </Border.GestureRecognizers>
+                            <Label Text="1–7 лет" TextColor="#2B2D42"/>
+                        </Border>
+
+                        <!-- Чип "Старше 7" -->
+                        <Border x:Name="ChipAgeOver7" StrokeShape="RoundRectangle 20" Stroke="#D1D1D1" StrokeThickness="1" Padding="15,8" Margin="0,0,10,10" BackgroundColor="Transparent">
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnAgeFilterTapped" CommandParameter="Старше 7" />
+                            </Border.GestureRecognizers>
+                            <Label Text="Старше 7" TextColor="#2B2D42"/>
+                        </Border>
                     </FlexLayout>
                 </VerticalStackLayout>
 
@@ -71,13 +96,38 @@
                 <VerticalStackLayout Spacing="10">
                     <Label Text="Размер" FontAttributes="Bold" TextColor="#2B2D42" FontSize="16"/>
                     <FlexLayout Wrap="Wrap">
-                        <Border StrokeShape="RoundRectangle 20" BackgroundColor="#B84A00" Padding="15,8" Margin="0,0,10,10">
-                            <Label Text="Любой" TextColor="White" FontAttributes="Bold"/>
+
+                        <!-- Чип "Любой" -->
+                        <Border x:Name="ChipSizeAny" StrokeShape="RoundRectangle 20" Stroke="#D1D1D1" StrokeThickness="1" BackgroundColor="Transparent" Padding="15,8" Margin="0,0,10,10">
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnSizeFilterTapped" CommandParameter="Любой" />
+                            </Border.GestureRecognizers>
+                            <Label Text="Любой" TextColor="#2B2D42"/>
                         </Border>
-                        <Border StrokeShape="RoundRectangle 20" Stroke="#D1D1D1" StrokeThickness="1" Padding="15,8" Margin="0,0,10,10">
+
+                        <!-- Чип "Малый" -->
+                        <Border x:Name="ChipSizeSmall" StrokeShape="RoundRectangle 20" Stroke="#D1D1D1" StrokeThickness="1" Padding="15,8" Margin="0,0,10,10" BackgroundColor="Transparent">
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnSizeFilterTapped" CommandParameter="Малый" />
+                            </Border.GestureRecognizers>
                             <Label Text="Малый" TextColor="#2B2D42"/>
                         </Border>
-                        <!-- ... другие чипы размера ... -->
+
+                        <!-- Чип "Средний" -->
+                        <Border x:Name="ChipSizeMedium" StrokeShape="RoundRectangle 20" Stroke="#D1D1D1" StrokeThickness="1" Padding="15,8" Margin="0,0,10,10" BackgroundColor="Transparent">
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnSizeFilterTapped" CommandParameter="Средний" />
+                            </Border.GestureRecognizers>
+                            <Label Text="Средний" TextColor="#2B2D42"/>
+                        </Border>
+
+                        <!-- Чип "Крупный" -->
+                        <Border x:Name="ChipSizeLarge" StrokeShape="RoundRectangle 20" Stroke="#D1D1D1" StrokeThickness="1" Padding="15,8" Margin="0,0,10,10" BackgroundColor="Transparent">
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnSizeFilterTapped" CommandParameter="Крупный" />
+                            </Border.GestureRecognizers>
+                            <Label Text="Крупный" TextColor="#2B2D42"/>
+                        </Border>
                     </FlexLayout>
                 </VerticalStackLayout>
 

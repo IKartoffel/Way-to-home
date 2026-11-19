@@ -72,6 +72,12 @@
                 <!-- Блок чек-листа -->
                 <Border StrokeShape="RoundRectangle 20" BackgroundColor="#FCEAC2" Padding="20" Margin="0,15,0,0">
                     <VerticalStackLayout Spacing="15">
+                        <Button Text="Пройти чек-лист" 
+        Clicked="OnChecklistClicked" 
+        BackgroundColor="#B84A00" 
+        TextColor="White" 
+        CornerRadius="20" 
+        HeightRequest="50" />
                         <Label Text="Я готов(а) к ответственности?" FontSize="18" FontAttributes="Bold" TextColor="#2B2D42"/>
                         <Label Text="Короткий чек-лист из 5 пунктов." FontSize="14" TextColor="#6C757D"/>
                         <Border StrokeShape="RoundRectangle 15" BackgroundColor="#B84A00" Padding="15" Margin="0,5,0,0">

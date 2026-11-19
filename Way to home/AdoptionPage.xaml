@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Way_to_home.AdoptionPage"
+             BackgroundColor="#FEF8EE"
+             Shell.NavBarIsVisible="False">
+
+    <Grid RowDefinitions="Auto, *, Auto" Padding="20, 30, 20, 20">
+
+        <!-- Шапка -->
+        <HorizontalStackLayout Grid.Row="0" Spacing="15" Margin="0,0,0,10">
+            <Border StrokeShape="RoundRectangle 20" StrokeThickness="1" Stroke="#E0E0E0" BackgroundColor="White" WidthRequest="40" HeightRequest="40" Padding="0">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnBackClicked" />
+                </Border.GestureRecognizers>
+                <Label Text="&lt;" FontSize="20" TextColor="#2B2D42" HorizontalOptions="Center" VerticalOptions="Center"/>
+            </Border>
+            <Label Text="Знакомство" FontSize="20" FontAttributes="Bold" TextColor="#2B2D42" VerticalOptions="Center"/>
+        </HorizontalStackLayout>
+
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Spacing="20">
+                <Label Text="{Binding Name, StringFormat='Вы хотите познакомиться с {0}'}" FontSize="24" FontAttributes="Bold" TextColor="#2B2D42"/>
+
+                <!-- Требования -->
+                <Border StrokeShape="RoundRectangle 15" Stroke="#E0E0E0" StrokeThickness="1" BackgroundColor="White" Padding="15">
+                    <VerticalStackLayout Spacing="5">
+                        <Label Text="Требования к хозяину" FontAttributes="Bold" FontSize="16" TextColor="#2B2D42"/>
+                        <Label Text="{Binding Requirements}" TextColor="#6C757D" FontSize="14"/>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Адрес приюта -->
+                <Border StrokeShape="RoundRectangle 15" Stroke="#E0E0E0" StrokeThickness="1" BackgroundColor="White" Padding="15">
+                    <VerticalStackLayout Spacing="5">
+                        <Label Text="Как нас найти" FontAttributes="Bold" FontSize="16" TextColor="#2B2D42"/>
+                        <Label Text="г. Москва, ул. Приютская, д. 10 (ежедневно с 10:00 до 19:00)" TextColor="#6C757D" FontSize="14"/>
+                        <Label Text="Телефон: +7 (999) 123-45-67" TextColor="#6C757D" FontSize="14" Margin="0,5,0,0"/>
+                    </VerticalStackLayout>
+                </Border>
+            </VerticalStackLayout>
+        </ScrollView>
+
+    </Grid>
+</ContentPage>

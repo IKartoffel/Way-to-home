@@ -7,19 +7,6 @@ namespace Way_to_home.ViewModels
 {
     public class AnimalsViewModel : INotifyPropertyChanged
     {
-        // Метод для сброса всех фильтров
-
-
-        public void ResetFilters()
-        {
-            // Сбрасываем значения фильтров в исходное состояние
-            CurrentTypeFilter = "Все";
-            CurrentSizeFilter = "Любой";
-
-            // Возвращаем в список всех животных
-            FilteredPets = new ObservableCollection<Pet>(_allPets);
-        }
-
         // 1. Список ВСЕХ животных
         private List<Pet> _allPets;
 
@@ -32,24 +19,24 @@ namespace Way_to_home.ViewModels
             {
                 _filteredPets = value;
                 OnPropertyChanged();
+                OnPropertyChanged(nameof(FilteredPetsCount)); // Обновляем счетчик вместе со списком
             }
         }
 
-        // Сюда мы будем сохранять выбранные фильтры
+        // Счетчик анкет
+        public int FilteredPetsCount => FilteredPets?.Count ?? 0;
+
+        // Свойства для сохранения выбранных фильтров
         public string CurrentTypeFilter { get; set; } = "Все";
+        public string CurrentAgeFilter { get; set; } = "Любой";
         public string CurrentSizeFilter { get; set; } = "Любой";
 
         public AnimalsViewModel()
         {
-            // Заполняем список тестовыми данными
-            _allPets = new List<Pet>
-            {
-                new Pet { Name = "Рикки", Type = "Пёс", Age = "2 года", Size = "Средний", Character = "Спокойный", ImagePath = "ricky.png" },
-                new Pet { Name = "Рыжий", Type = "Кот", Age = "4 года", Size = "Средний", Character = "Ласковый", ImagePath = "ryzhiy.png" },
-                new Pet { Name = "Реджи", Type = "Пёс", Age = "3 года", Size = "Крупный", Character = "Спокойный", ImagePath = "redzhi.png" }
-            };
+            // Берем данные из вашего PetData
+            _allPets = PetData.Pets;
 
-            // Изначально показываем всех
+            // Изначально показываем всех (дублирующую строку я убрал)
             FilteredPets = new ObservableCollection<Pet>(_allPets);
         }
 
@@ -58,26 +45,53 @@ namespace Way_to_home.ViewModels
         {
             var result = _allPets.AsEnumerable();
 
-            // Фильтр по виду
-            if (CurrentTypeFilter != "Все")
+            // 1. Фильтр по виду
+            if (CurrentTypeFilter != "Все" && !string.IsNullOrEmpty(CurrentTypeFilter))
             {
-                // В фильтре написано "Собаки", а в классе Pet.Type - "Пёс". Приводим к одному виду.
                 string targetType = CurrentTypeFilter == "Собаки" ? "Пёс" : "Кот";
                 result = result.Where(p => p.Type == targetType);
             }
 
-            // Фильтр по размеру
-            if (CurrentSizeFilter != "Любой")
+            // 2. Фильтр по размеру
+            if (CurrentSizeFilter != "Любой" && !string.IsNullOrEmpty(CurrentSizeFilter))
             {
                 result = result.Where(p => p.Size == CurrentSizeFilter);
             }
 
-            // Обновляем список на экране
+            // 3. Фильтр по возрасту
+            if (CurrentAgeFilter != "Любой" && !string.IsNullOrEmpty(CurrentAgeFilter))
+            {
+                result = result.Where(p =>
+                {
+                    string ageStr = p.Age.Split(' ')[0];
+                    if (int.TryParse(ageStr, out int age))
+                    {
+                        if (CurrentAgeFilter == "До 1 года") return age < 1;
+                        if (CurrentAgeFilter == "1–7 лет") return age >= 1 && age <= 7;
+                        if (CurrentAgeFilter == "Старше 7") return age > 7;
+                    }
+                    return true;
+                });
+            }
+
+            // Обновляем список (счетчик обновится автоматически через setter)
             FilteredPets = new ObservableCollection<Pet>(result);
         }
 
-        // Реализация интерфейса для обновления UI
-        public event PropertyChangedEventHandler PropertyChanged;
+        // Метод для сброса всех фильтров
+        public void ResetFilters()
+        {
+            CurrentTypeFilter = "Все";
+            CurrentAgeFilter = "Любой";   // Добавил сброс возраста
+            CurrentSizeFilter = "Любой";
+
+            // Возвращаем в список всех животных
+            FilteredPets = new ObservableCollection<Pet>(_allPets);
+        }
+
+        // --- РЕАЛИЗАЦИЯ INotifyPropertyChanged ---
+        public event PropertyChangedEventHandler? PropertyChanged;
+
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
